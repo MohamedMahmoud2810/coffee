@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>محصول البيت - Home Harvest Coffee</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
     <style>
         /* -------------------------------------------------------------------------- */
         /* CSS                                    */
@@ -297,17 +300,17 @@
         <p style="color: var(--text-light); margin-top: 15px; font-size: 1.1rem;">
             أو عبر الواتساب: <strong style="color: #25D366; text-decoration: underline;">+20 122 363 7768</strong>
         </p>
-
     </section>
 
-    
     <footer>
         <p>&copy; 2024 محصول البيت. قهوة بجودة المحصول وطعم البيت.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         // --------------------------------------------------------------------------
-        // JavaScript لإنشاء السلة وإرسال الطلب عبر الواتساب (الإصدار الاحترافي والنهائي)
+        // JavaScript لإنشاء السلة وإرسال الطلب عبر الواتساب (بالتنبيهات الجذابة)
         // --------------------------------------------------------------------------
 
         let cart = {}; 
@@ -318,13 +321,11 @@
         const cartItemsDiv = document.getElementById('cart-items');
         const cartTotalSpan = document.getElementById('cart-total');
 
-        // المتغيرات الجديدة لحقول الإدخال
         const customerName = document.getElementById('customer-name');
         const customerPhone = document.getElementById('customer-phone');
         const customerAddress = document.getElementById('customer-address');
 
 
-        // قائمة الأسعار: تأكد من أن كل اسم منتج مطابق تماماً لـ data-name في الـ HTML
         const prices = {
             'إسبريسو سينجل': 30,
             'لاتيه كلاسيك': 45,
@@ -342,7 +343,11 @@
                 const itemName = button.getAttribute('data-name');
                 
                 if (!itemName || !prices[itemName]) {
-                    alert('خطأ: لا يمكن إضافة هذا العنصر. الرجاء الضغط على زر المنتج.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطأ في المنتج ❌',
+                        text: 'هذا العنصر غير مُعرّف. الرجاء التأكد من الضغط على زر منتج محدد.',
+                    });
                     return; 
                 }
                 
@@ -352,7 +357,18 @@
                     cart[itemName] = 1;
                 }
 
-                alert(`تم إضافة "${itemName}" إلى السلة! الكمية: ${cart[itemName]}`);
+                // استخدام SweetAlert2 للتنبيه الجذاب
+                Swal.fire({
+                    title: 'تم الإضافة بنجاح! 🎉',
+                    text: `تم إضافة "${itemName}" إلى السلة. الكمية الحالية: ${cart[itemName]}`,
+                    icon: 'success',
+                    toast: true, 
+                    position: 'bottom-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
+                
                 updateCartDisplay(); 
             });
         });
@@ -389,9 +405,14 @@
 
         // ----------------------- وظيفة إرسال الأوردر عبر الواتساب -----------------------
         checkoutButton.addEventListener('click', () => {
+            
             // 1. التحقق من وجود منتجات
             if (Object.keys(cart).filter(item => cart[item] > 0 && prices[item] !== undefined).length === 0) {
-                 alert('الرجاء إضافة منتجات صالحة للسلة أولاً!');
+                 Swal.fire({
+                    icon: 'warning',
+                    title: 'السلة فارغة 🛒',
+                    text: 'الرجاء إضافة مشروبات للسلة أولاً قبل إرسال الطلب.',
+                });
                  return;
             }
 
@@ -401,7 +422,11 @@
             const address = customerAddress.value.trim();
 
             if (!name || !address) {
-                alert('الرجاء إدخال الاسم والعنوان التفصيلي أولاً لإتمام الطلب.');
+                Swal.fire({
+                    icon: 'info',
+                    title: 'أكمل بياناتك 📝',
+                    text: 'الرجاء إدخال الاسم والعنوان التفصيلي لنتأكد من توصيل طلبك بنجاح.',
+                });
                 return;
             }
             
@@ -425,7 +450,6 @@
                     const itemPrice = prices[item];
                     const itemTotal = cart[item] * itemPrice;
                     total += itemTotal;
-                    // استخدام فواصل بسيطة جداً
                     message += `${cart[item]} ${item} | ${itemTotal} ج.م\n`; 
                 }
             }
