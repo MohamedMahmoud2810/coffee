@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محصول البيت - Home Harvest Coffee</title>
+    <style>
+        /* -------------------------------------------------------------------------- */
+        /* CSS                                    */
+        /* -------------------------------------------------------------------------- */
+        :root {
+            --main-brown: #5C3A2A; 
+            --crema-beige: #EADBC8; 
+            --accent-color: #A47449; 
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --font-family: 'Arial', sans-serif; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--crema-beige);
+            color: var(--text-dark);
+            line-height: 1.6;
+            direction: rtl; 
+        }
+
+        header {
+            background-color: var(--main-brown);
+            color: var(--text-light);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .logo-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--main-brown);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 5px;
+            width: fit-content;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: var(--text-light);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+            border: 1px solid var(--accent-color);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item h3 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .menu-item p {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--main-brown);
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background-color: var(--main-brown);
+            color: var(--text-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--accent-color);
+        }
+
+        .contact-section {
+            background-color: var(--main-brown);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .contact-section h2 {
+            color: var(--text-light);
+            border-bottom-color: var(--crema-beige);
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background-color: #25D366; 
+            color: var(--text-light);
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: opacity 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9rem;
+            background-color: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            .logo-icon {
+                font-size: 2.5rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <span class="logo-icon">☕</span>
+            <div class="logo">محصول البيت</div>
+        </div>
+        <p>قهوة طازجة، مطحونة ومجهزة بشغف من البيت!</p>
+    </header>
+
+    <main class="container">
+        
+        <section id="cart-section" style="margin-top: 50px; padding: 20px; background-color: var(--text-light); border-radius: 10px;">
+            <h2>سلة المشتريات</h2>
+            <div id="cart-items" style="margin-bottom: 20px; padding: 10px; border: 1px dashed #ccc;">
+                <p>السلة فارغة حالياً. ابدأ بإضافة مشروبك المفضل!</p>
+            </div>
+            
+            <p style="font-size: 1.5rem; font-weight: bold; color: var(--main-brown);">
+                الإجمالي الكلي: <span id="cart-total">0</span> ج.م
+            </p>
+
+            <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+                <input type="text" id="customer-name" placeholder="الاسم ثلاثي" required 
+                       style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                <input type="tel" id="customer-phone" placeholder="رقم هاتف إضافي (اختياري)" 
+                       style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                <textarea id="customer-address" placeholder="العنوان التفصيلي" rows="3" required 
+                          style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; resize: vertical;"></textarea>
+            </div>
+            <button id="checkout-button" style="background-color: #25D366; margin-top: 20px; display: none; color: var(--text-light); border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; font-size: 1rem;">
+                إرسال الأوردر عبر الواتساب الآن
+            </button>
+        </section>
+
+        <section id="hot-drinks" style="margin-top: 50px;">
+            <h2>مشروبات ساخنة</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h3>إسبريسو سينجل</h3>
+                    <p>جرعة مركزة وقوية من أجود المحاصيل.</p>
+                    <span class="price">30 ج.م</span>
+                    <button class="add-to-cart" data-name="إسبريسو سينجل">أضف إلى السلة</button>
+                </div>
+                <div class="menu-item">
+                    <h3>لاتيه كلاسيك</h3>
+                    <p>الإسبريسو مع حليب مبخر مخملي.</p>
+                    <span class="price">45 ج.م</span>
+                    <button class="add-to-cart" data-name="لاتيه كلاسيك">أضف إلى السلة</button>
+                </div>
+                <div class="menu-item">
+                    <h3>كابتشينو</h3>
+                    <p>توازن مثالي بين الإسبريسو والحليب والرغوة الغنية.</p>
+                    <span class="price">45 ج.م</span>
+                    <button class="add-to-cart" data-name="كابتشينو">أضف إلى السلة</button>
+                </div>
+                <div class="menu-item">
+                    <h3>امريكانو</h3>
+                    <p>بساطة القهوة السوداء القوية.</p>
+                    <span class="price">35 ج.م</span>
+                    <button class="add-to-cart" data-name="امريكانو">أضف إلى السلة</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="cold-drinks" style="margin-top: 50px;">
+            <h2>مشروبات باردة</h2>
+            <div class="menu-grid">
+                 <div class="menu-item" style="border-color: #25D366;">
+                    <h3>فانيليا لاتيه ولا يا ولا!</h3>
+                    <p>مشروبنا الخاص: شوت إسبريسو، نسكافيه فانيليا لاتيه، لبن مكثف وثلج.</p>
+                    <span class="price">65 ج.م</span>
+                    <button class="add-to-cart" data-name="فانيليا لاتيه ولا يا ولا!">أضف إلى السلة</button>
+                </div>
+                <div class="menu-item">
+                    <h3>آيس كراميل ماكياتو</h3>
+                    <p>طبقات من الكراميل والحليب والإسبريسو.</p>
+                    <span class="price">60 ج.م</span>
+                    <button class="add-to-cart" data-name="آيس كراميل ماكياتو">أضف إلى السلة</button>
+                </div>
+                <div class="menu-item">
+                    <h3>كولد برو (Cold Brew)</h3>
+                    <p>قهوة منقوعة على البارد لمدة 24 ساعة، طعم ناعم وقوي.</p>
+                    <span class="price">55 ج.م</span>
+                    <button class="add-to-cart" data-name="كولد برو (Cold Brew)">أضف إلى السلة</button>
+                </div>
+                 <div class="menu-item">
+                    <h3>آيس موكا</h3>
+                    <p>إسبريسو، شوكولاتة وحليب وثلج.</p>
+                    <span class="price">60 ج.م</span>
+                    <button class="add-to-cart" data-name="آيس موكا">أضف إلى السلة</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <section class="contact-section">
+        <h2>تواصل معنا و اطلب الآن</h2>
+        <p>نخدم منطقة... [اذكر منطقتك] ونوصل لحد باب البيت! يمكنك الاتصال مباشرة:</p>
+        
+        <a href="tel:+201223637768" class="whatsapp-btn" style="background-color: #007bff;">
+            اتصل بنا مباشرة
+        </a>
+        
+        <p style="color: var(--text-light); margin-top: 15px; font-size: 1.1rem;">
+            أو عبر الواتساب: <strong style="color: #25D366; text-decoration: underline;">+20 122 363 7768</strong>
+        </p>
+
+    </section>
+
+    
+    <footer>
+        <p>&copy; 2024 محصول البيت. قهوة بجودة المحصول وطعم البيت.</p>
+    </footer>
+
+    <script>
+        // --------------------------------------------------------------------------
+        // JavaScript لإنشاء السلة وإرسال الطلب عبر الواتساب (الإصدار الاحترافي والنهائي)
+        // --------------------------------------------------------------------------
+
+        let cart = {}; 
+        const whatsappNumber = '201223637768'; 
+
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const checkoutButton = document.getElementById('checkout-button');
+        const cartItemsDiv = document.getElementById('cart-items');
+        const cartTotalSpan = document.getElementById('cart-total');
+
+        // المتغيرات الجديدة لحقول الإدخال
+        const customerName = document.getElementById('customer-name');
+        const customerPhone = document.getElementById('customer-phone');
+        const customerAddress = document.getElementById('customer-address');
+
+
+        // قائمة الأسعار: تأكد من أن كل اسم منتج مطابق تماماً لـ data-name في الـ HTML
+        const prices = {
+            'إسبريسو سينجل': 30,
+            'لاتيه كلاسيك': 45,
+            'كابتشينو': 45,
+            'امريكانو': 35,
+            'فانيليا لاتيه ولا يا ولا!': 65,
+            'آيس كراميل ماكياتو': 60,
+            'كولد برو (Cold Brew)': 55,
+            'آيس موكا': 60
+        };
+
+        // ----------------------- وظيفة إضافة المنتج للسلة -----------------------
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const itemName = button.getAttribute('data-name');
+                
+                if (!itemName || !prices[itemName]) {
+                    alert('خطأ: لا يمكن إضافة هذا العنصر. الرجاء الضغط على زر المنتج.');
+                    return; 
+                }
+                
+                if (cart[itemName]) {
+                    cart[itemName]++;
+                } else {
+                    cart[itemName] = 1;
+                }
+
+                alert(`تم إضافة "${itemName}" إلى السلة! الكمية: ${cart[itemName]}`);
+                updateCartDisplay(); 
+            });
+        });
+        
+        // ----------------------- وظيفة تحديث عرض السلة في الصفحة -----------------------
+        function updateCartDisplay() {
+            cartItemsDiv.innerHTML = ''; 
+            let total = 0;
+            let hasItems = false;
+
+            for (const item in cart) {
+                if (cart[item] > 0 && prices[item] !== undefined) { 
+                    hasItems = true;
+                    const itemPrice = prices[item]; 
+                    const itemTotal = cart[item] * itemPrice;
+                    total += itemTotal;
+                    
+                    const itemElement = document.createElement('p');
+                    itemElement.innerHTML = `${item} (x${cart[item]}) - الإجمالي: ${itemTotal} ج.م`;
+                    cartItemsDiv.appendChild(itemElement);
+                }
+            }
+
+            if (!hasItems) {
+                cartItemsDiv.innerHTML = '<p>السلة فارغة حالياً. ابدأ بإضافة مشروبك المفضل!</p>';
+                checkoutButton.style.display = 'none';
+            } else {
+                checkoutButton.style.display = 'inline-block';
+            }
+
+            cartTotalSpan.textContent = total;
+        }
+
+
+        // ----------------------- وظيفة إرسال الأوردر عبر الواتساب -----------------------
+        checkoutButton.addEventListener('click', () => {
+            // 1. التحقق من وجود منتجات
+            if (Object.keys(cart).filter(item => cart[item] > 0 && prices[item] !== undefined).length === 0) {
+                 alert('الرجاء إضافة منتجات صالحة للسلة أولاً!');
+                 return;
+            }
+
+            // 2. سحب البيانات من حقول الإدخال والتحقق منها
+            const name = customerName.value.trim();
+            const phone = customerPhone.value.trim();
+            const address = customerAddress.value.trim();
+
+            if (!name || !address) {
+                alert('الرجاء إدخال الاسم والعنوان التفصيلي أولاً لإتمام الطلب.');
+                return;
+            }
+            
+            // 3. بناء رسالة الواتساب
+            let message = "أهلاً محصول البيت! طلب أوردر جديد:\n\n";
+
+            // إضافة بيانات العميل للرسالة:
+            message += `*الاسم:* ${name}\n`;
+            message += `*العنوان:* ${address}\n`;
+            if (phone) {
+                message += `*هاتف إضافي:* ${phone}\n`;
+            }
+            message += `----------------------------\n`;
+
+
+            let total = 0;
+            
+            // بناء نص الرسالة (المنتجات)
+            for (const item in cart) {
+                if (cart[item] > 0 && prices[item] !== undefined) { 
+                    const itemPrice = prices[item];
+                    const itemTotal = cart[item] * itemPrice;
+                    total += itemTotal;
+                    // استخدام فواصل بسيطة جداً
+                    message += `${cart[item]} ${item} | ${itemTotal} ج.م\n`; 
+                }
+            }
+            
+            message += `\n**الإجمالي الكلي للطلب: ${total} ج.م**\n`;
+
+            // 4. إرسال الرسالة
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappLink, '_blank'); 
+        });
+
+        // التهيئة المبدئية
+        updateCartDisplay();
+    </script>
+</body>
+</html>
